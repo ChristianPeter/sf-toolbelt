@@ -6,6 +6,8 @@
   "engines": {
     "vscode": "^1.69.0"
   },
+  "repository": "https://github.com/ChristianPeter/sf-toolbelt",
+	"license": "MIT",
   "categories": [
     "Other"
   ],
