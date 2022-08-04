@@ -10,14 +10,14 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:sftoolbelt.helloWorld"
+    "onCommand:sftoolbelt.toApexString"
   ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "sftoolbelt.helloWorld",
-        "title": "Hello World"
+        "command": "sftoolbelt.toApexString",
+        "title": "SF-Toolbelt: to Apex String"
       }
     ]
   },
