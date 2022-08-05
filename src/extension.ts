@@ -111,32 +111,34 @@ export function activate(context: vscode.ExtensionContext) {
 
 
 	let disposable3 = vscode.commands.registerCommand('sftoolbelt.sortCustomLabels', () => {
-
-
 		const editor = vscode.window.activeTextEditor;
-		let currentText = editor?.document.getText() as string;
+		const selections = editor?.selections;
 
-		if (currentText) {
-			transcode(currentText, 'xml', 'json').then(data => {
-				const d = JSON.parse(data) as any;
-				d.CustomLabels.labels.sort((a: any,b: any) => {
-					const aa = a.fullName[0] as string;
-					const bb = b.fullName[0] as string;
-					return aa.localeCompare(bb);
-				});
-				
-				transcode(JSON.stringify(d), 'json', 'xml').then(data1 => {
+		if (selections == null || selections.length === 0) return undefined;
 
-					vscode.window.activeTextEditor?.edit(editBuilder => {
-						editBuilder.replace(new vscode.Range(0,0,1,0), data1);
+		return vscode.window.activeTextEditor?.edit(editBuilder => {
+			for (let idx = 0; idx < selections.length; idx++) {
+				const currentText = editor?.document.getText(selections[idx]) || '';
+
+				if (currentText) {
+					transcode(currentText, 'xml', 'json').then(data => {
+						const d = JSON.parse(data) as any;						
+						d.CustomLabels.labels.sort((a: any,b: any) => {
+							const aa = a.fullName[0] as string;
+							const bb = b.fullName[0] as string;
+							return aa.localeCompare(bb);
+						});
+						
+						transcode(JSON.stringify(d), 'json', 'xml').then(data1 => {
+							const newContent = data1.replace('standalone="yes"', '');
+							vscode.window.activeTextEditor?.edit(editBuilder => {
+								editBuilder.replace(selections[idx], newContent);
+							});
+						});
 					});
-				});
-				
-			});
-
-			
-		}
-		
+				}
+			}
+		});
 	});
 
 	// 
