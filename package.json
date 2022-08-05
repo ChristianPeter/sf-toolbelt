@@ -3,18 +3,19 @@
   "name": "sftoolbelt",
   "displayName": "SFToolbelt",
   "description": "misc utils to help make your live easier",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.69.0"
   },
   "repository": "https://github.com/ChristianPeter/sf-toolbelt",
-	"license": "MIT",
+  "license": "MIT",
   "categories": [
     "Other"
   ],
   "activationEvents": [
     "onCommand:sftoolbelt.toApexString",
-    "onCommand:sftoolbelt.inConverter"
+    "onCommand:sftoolbelt.inConverter",
+    "onCommand:sftoolbelt.sortCustomLabels"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -26,6 +27,10 @@
       {
         "command": "sftoolbelt.inConverter",
         "title": "SF-Toolbelt: IN Converter"
+      },
+      {
+        "command": "sftoolbelt.sortCustomLabels",
+        "title": "SF-Toolbelt: Sort CustomLabels"
       }
     ]
   },
@@ -38,16 +43,19 @@
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.69.0",
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.1",
     "@types/node": "16.x",
+    "@types/vscode": "^1.69.0",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
+    "@vscode/test-electron": "^2.1.5",
     "eslint": "^8.20.0",
     "glob": "^8.0.3",
     "mocha": "^10.0.0",
-    "typescript": "^4.7.4",
-    "@vscode/test-electron": "^2.1.5"
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "any-json-no-cson": "^3.2.2"
   }
 }

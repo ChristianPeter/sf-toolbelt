@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { transcode } from 'any-json-no-cson';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -108,8 +109,40 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	});
 
+
+	let disposable3 = vscode.commands.registerCommand('sftoolbelt.sortCustomLabels', () => {
+
+
+		const editor = vscode.window.activeTextEditor;
+		let currentText = editor?.document.getText() as string;
+
+		if (currentText) {
+			transcode(currentText, 'xml', 'json').then(data => {
+				const d = JSON.parse(data) as any;
+				d.CustomLabels.labels.sort((a: any,b: any) => {
+					const aa = a.fullName[0] as string;
+					const bb = b.fullName[0] as string;
+					return aa.localeCompare(bb);
+				});
+				
+				transcode(JSON.stringify(d), 'json', 'xml').then(data1 => {
+
+					vscode.window.activeTextEditor?.edit(editBuilder => {
+						editBuilder.replace(new vscode.Range(0,0,1,0), data1);
+					});
+				});
+				
+			});
+
+			
+		}
+		
+	});
+
+	// 
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(disposable2);
+	context.subscriptions.push(disposable3);
 }
 
 // this method is called when your extension is deactivated
