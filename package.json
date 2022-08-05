@@ -3,7 +3,7 @@
   "name": "sftoolbelt",
   "displayName": "SFToolbelt",
   "description": "misc utils to help make your live easier",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.69.0"
   },
@@ -13,7 +13,8 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:sftoolbelt.toApexString"
+    "onCommand:sftoolbelt.toApexString",
+    "onCommand:sftoolbelt.inConverter"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -21,6 +22,10 @@
       {
         "command": "sftoolbelt.toApexString",
         "title": "SF-Toolbelt: to Apex String"
+      },
+      {
+        "command": "sftoolbelt.inConverter",
+        "title": "SF-Toolbelt: IN Converter"
       }
     ]
   },
