@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { transcode } from 'any-json-no-cson';
+import {showInputBox} from './dialog';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -141,10 +142,45 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	});
 
+	let disposable4 = vscode.commands.registerCommand('sftoolbelt.customConverter', () => {
+		const editor = vscode.window.activeTextEditor;
+		const selections = editor?.selections;
+
+		if (selections == null || selections.length === 0) return undefined;
+
+
+		let result = showInputBox();
+
+		result.then((data) => {
+			vscode.window.showInformationMessage(`Got: ${data}`);
+			const cfg = JSON.parse(data || '{}');
+
+			vscode.window.activeTextEditor?.edit(editBuilder => {
+				for (let idx = 0; idx < selections.length; idx++) {
+					const currentText = editor?.document.getText(selections[idx]) || '';
+					const splitted = currentText.split('\n');
+
+					let cleanedUpRows = splitted
+						.filter(row => row.trim().length > 0)
+						.map(row => {
+							return row.replace(/\'/gi, '\\\'');
+						});
+
+					let newContent = cfg.prefix + cfg.quote + cleanedUpRows.join(cfg.quote + cfg.seperator + cfg.quote) + cfg.quote + cfg.suffix;
+
+					editBuilder.replace(selections[idx], newContent);
+				}
+				
+			});
+		});
+		
+	});
+
 	// 
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(disposable2);
 	context.subscriptions.push(disposable3);
+	context.subscriptions.push(disposable4);
 }
 
 // this method is called when your extension is deactivated
