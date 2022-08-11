@@ -3,7 +3,7 @@
   "name": "sftoolbelt",
   "displayName": "SFToolbelt",
   "description": "misc utils to help make your life developing with salesforce / apex easier",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "vscode": "^1.69.0"
   },

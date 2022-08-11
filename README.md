@@ -34,6 +34,10 @@ none as I know of
 
 this is the initial release. so only one proof-of-concept feature has been implemented.
 
+### 0.0.5
+
+custom IN converter added for custom pattern
+
 ### 0.0.4
 
 bugfix release for build process
