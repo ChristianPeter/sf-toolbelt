@@ -15,6 +15,7 @@
   "activationEvents": [
     "onCommand:sftoolbelt.toApexString",
     "onCommand:sftoolbelt.inConverter",
+    "onCommand:sftoolbelt.customConverter",
     "onCommand:sftoolbelt.sortCustomLabels"
   ],
   "main": "./out/extension.js",
@@ -26,7 +27,11 @@
       },
       {
         "command": "sftoolbelt.inConverter",
-        "title": "SF-Toolbelt: IN Converter"
+        "title": "SF-Toolbelt: IN-Converter"
+      },
+      {
+        "command": "sftoolbelt.customConverter",
+        "title": "SF-Toolbelt: Custom IN-Converter"
       },
       {
         "command": "sftoolbelt.sortCustomLabels",
