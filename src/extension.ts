@@ -176,11 +176,39 @@ export function activate(context: vscode.ExtensionContext) {
 		
 	});
 
+	let disposable5 = vscode.commands.registerCommand('sftoolbelt.addBackslashLinebreak', () => {
+
+
+		const editor = vscode.window.activeTextEditor;
+		const selections = editor?.selections;
+
+		if (selections == null || selections.length === 0) return undefined;
+
+		return vscode.window.activeTextEditor?.edit(editBuilder => {
+			for (let idx = 0; idx < selections.length; idx++) {
+				const currentText = editor?.document.getText(selections[idx]) || '';
+				const splitted = currentText.split('\n');
+				let newContent = splitted
+					.filter(row => row.trim().length > 0)					
+					.map(row => {
+					return row + "\\";
+				}).join('\n');
+
+				newContent = newContent.substring(0, newContent.length-2);
+				editBuilder.replace(selections[idx], newContent);
+			}
+			
+		});
+		
+	});
+
 	// 
 	context.subscriptions.push(disposable);
 	context.subscriptions.push(disposable2);
 	context.subscriptions.push(disposable3);
 	context.subscriptions.push(disposable4);
+	context.subscriptions.push(disposable5);
+	
 }
 
 // this method is called when your extension is deactivated

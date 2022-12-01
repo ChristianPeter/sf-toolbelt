@@ -3,7 +3,7 @@
   "name": "sftoolbelt",
   "displayName": "SFToolbelt",
   "description": "misc utils to help make your life developing with salesforce / apex easier",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "engines": {
     "vscode": "^1.69.0"
   },
@@ -16,7 +16,8 @@
     "onCommand:sftoolbelt.toApexString",
     "onCommand:sftoolbelt.inConverter",
     "onCommand:sftoolbelt.customConverter",
-    "onCommand:sftoolbelt.sortCustomLabels"
+    "onCommand:sftoolbelt.sortCustomLabels",
+    "onCommand:sftoolbelt.addBackslashLinebreak"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -36,6 +37,10 @@
       {
         "command": "sftoolbelt.sortCustomLabels",
         "title": "SF-Toolbelt: Sort CustomLabels"
+      },
+      {
+        "command": "sftoolbelt.addBackslashLinebreak",
+        "title": "SF-Toolbelt: add backslash at line end"
       }
     ]
   },
